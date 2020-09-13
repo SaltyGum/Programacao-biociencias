@@ -10,12 +10,12 @@ for linha in arq:
     if gene in linha:
         nome = linha.split("|")
         print("Cabeçalho:", nome[0])
-        s = n + 1
-        print(s)
-arq.seek(s)
-for linha2 in arq:
-    if '>' in linha2:
+        n = n + 1
+    if '>' not in linha:
+        for linha2 in arq:
+            if '>' in linha2:
+                break
+            l = l + linha2.replace('\n','')
         print("Sequencia:", l)
-        break
-    l = l + linha2.rstrip()
+        l=''
 arq.close()
