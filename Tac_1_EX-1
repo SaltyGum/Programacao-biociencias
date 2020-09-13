@@ -1,0 +1,21 @@
+arq = open(
+    r"C:\Users\Jefferson\Desktop\UFRJ\prog\Tac-1-2\TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
+gene = input("Digite o gene para busca:")
+n = 0
+s = 0
+l = ''
+for linha in arq:
+    linha = linha.rstrip()
+    n = n + 1
+    if gene in linha:
+        nome = linha.split("|")
+        print("Cabeçalho:", nome[0])
+        s = n + 1
+        print(s)
+arq.seek(s)
+for linha2 in arq:
+    if '>' in linha2:
+        print("Sequencia:", l)
+        break
+    l = l + linha2.rstrip()
+arq.close()
