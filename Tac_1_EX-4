@@ -1,4 +1,9 @@
 a - A função upper é utilizada para deixar uma string em maiusculo.
+
 b - A função rstrip é utilizada para remover caracteres do final da linha como espaço ou quebra de linha.
-c - 
-d - 
+
+c - Caso não fosse incluido o upper o programa não entraria na condição devido estar igualando a "BIRD" toda em maiusculo. Caso fosse pedido um input para fazer a comparação
+e o usuario digitasse "Bird" a condição não seria ativada já que o programa iria comparar data == "BIRD" com o input == "Bird".
+
+d - Caso não fosse colocado o rstrip a condição não seria ativada porque o programa possivelmente leria "BIRD\n" ou "BIRD\t" o que ocasionaria um erro. Caso fosse colocado
+um input e o usuario digitasse "Bird " sem o rstrip a condição não seria ativada e seriam perdidas linhas.
