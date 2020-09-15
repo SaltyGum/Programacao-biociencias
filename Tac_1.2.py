@@ -1,0 +1,22 @@
+# Abrindo o arquivo texto.
+arq = open(r"C:\Users\Jefferson\Desktop\UFRJ\prog\Tac-1-2\TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta")
+# Pedindo por um comando de inicio
+gene = input("Tecle Enter Para Iniciar:")
+l = ''
+# For usado para ler o arquivo linha a linha.
+for linha in arq:
+    nome = []
+    #IF usado para retirar o nome do cabeçalho das proteinas do texto splitando apos o | e printando.
+    if '>' in linha:
+        nome = linha.split("|")
+        print("Cabeçalho:", nome[0])
+#For usado para concatenar as linhas da sequencia genetica do arquivo texto.
+        for linha2 in arq:
+            if '>' in linha2:
+#IF usado para forçar a parada do for e não concatenar todas as linhas.
+                break
+            l = l + linha2.replace('\n', '')
+        print("Sequencia:", l)
+        l = ''
+#Fechando o arquivo texto.
+arq.close()
