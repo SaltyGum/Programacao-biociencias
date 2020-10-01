@@ -6,8 +6,8 @@ import numpy as np
 #Pegando entrada
 entrada = sys.argv[1::]
 arq = entrada[0]
-b = int(entrada[1])
-m = int(entrada[2])
+b = float(entrada[1])
+m = float(entrada[2])
 # Copiando arquivo
 df = pd.read_excel(arq).copy()
 # Passando colunas selecionadas
