@@ -1,0 +1,7 @@
+import pandas as pd
+from Bio.Seq import Seq
+from Bio.SeqUtils import GC, nt_search
+seq = Seq(input('Digite sua Sequencia de DNA:'))
+rna = seq.transcribe()
+protein = rna.translate()
+print('Rna resultante: ',rna,'\nProteina resultante:', protein)
