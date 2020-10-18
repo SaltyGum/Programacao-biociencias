@@ -1,0 +1,41 @@
+# importação de bibliotecas:
+import pandas as pd
+from Bio.Seq import Seq
+from Bio import SeqIO
+from Bio.Blast.Applications import NcbiblastxCommandline
+# blast path:
+blastpati = input("Digite o Caminho para o Blast: ")
+# Sequencia desconhecida:
+alvo = input("Digite o Caminho Para a Sequencia Desconhecida:")
+# Banco de dados para busca:
+busca = input("Digite o Caminho para Arquivo que será Usado na Pesquisa: ")
+# Saida:
+saida = input("Digite o Caminho da Saida: ")
+# blast
+blase = NcbiblastxCommandline(cmd = blastpati,
+                              query = alvo,
+                              subject = busca,
+                              evalue = 0.05,
+                              outfmt = 6,
+                              out = saida)
+# reposicionamento
+stdout, stdeer = blase()
+# adicionando cabeçalho à tabela de resultados do blast:
+result = pd.read_csv(saida,
+                     sep='\t',
+                     names=["qseqid",
+                            "sseqid",
+                            "pident",
+                            "length",
+                            "mismatch",
+                            "gapopen",
+                            "qstart",
+                            "qend",
+                            "sstart",
+                            "send",
+                            "evalue",
+                            "bitscore"])
+# ordenando resultado BLAST por ordem crescente de score:
+score = result.sort_values('bitscore')
+# printando a última linha (maior score):
+print('Maior score: ',score.iloc[-1][-1])
