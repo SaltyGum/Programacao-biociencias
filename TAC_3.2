@@ -1,0 +1,22 @@
+import pandas as pd
+from Bio.Seq import Seq
+from Bio.SeqUtils import GC, nt_search
+aux = '>'
+arq = open(r"sequencias.fasta")
+list = []
+for linha in arq:
+    if '>' in linha:
+        aux = linha
+    else:
+        aux2 = aux + '\n' + linha
+        list.append(aux2)
+i = 0
+x = 0
+while i in range(len(list)):
+    x = x + 1
+    nome = 'Sequência_' + str(x) + '.fasta'
+    arq2 = open(nome, 'w')
+    arq2.write(list[i])
+    arq2.close()
+    i = i + 1
+arq.close()
