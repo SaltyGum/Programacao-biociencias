@@ -1,0 +1,14 @@
+# Pegando sequencia
+seq = input("Digite sua Sequencia: ")
+cg_siz = 0
+# For pra rodar a string
+for letra in seq:
+    if letra.upper() == 'G' or letra.upper() == 'C':
+        cg_siz += 1
+# Calculando valor do conteudo GC
+content = (cg_siz * 100) / len(seq)
+# Print do Resultado
+print("Conteudo GC: %d\n"
+      "Quantidade de G + C: %d\n"
+      "Tamanho da Sequencia: %d"
+      % (content,cg_siz,len(seq)))
