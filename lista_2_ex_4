@@ -1,0 +1,13 @@
+# Recebendo sequência do usuario
+seq = str(input('Digite sua Sequencia:'))
+# Recebendo coordenadas
+## O split separa o input para facilitar o uso dos valores
+cod1 = str(input('coordenada 1:')).split(';')
+cod2 = str(input('coordenada 2:')).split(';')
+## pegando valores com base na coordenada
+exon1 = seq[int(cod1[0])-1:int(cod1[-1])-1]
+exon2 = seq[int(cod2[0])-1:int(cod2[-1])-1]
+# Uniao dos exons
+saida = exon1+exon2
+## Print da saida
+print(saida)
