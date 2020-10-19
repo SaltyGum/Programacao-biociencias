@@ -1,0 +1,23 @@
+##Função pra inverter string
+def truck(text):
+    return text[:: -1]
+
+
+## Pegando Sequencia do usuario
+seq1 = input("Digite a sequencia 1: ")
+seq2 = input("Digite a Sequencia 2: ")
+dna = seq1 + seq2
+rev = list(truck(dna))
+aux = 0
+for i in rev:
+    if i.upper() == 'G':
+        rev[aux] = 'C'
+    elif i.upper() == 'A':
+        rev[aux] = 'T'
+    elif i.upper() == 'T':
+        rev[aux] = 'A'
+    elif i.upper() == 'C':
+        rev[aux] = 'G'
+    aux += 1
+fin = ''.join(rev)
+print('Complemento Reverso: ', fin)
