@@ -1,0 +1,19 @@
+#Dicionario de amnoacidos
+amno = ['A','C','D','E','F','G','H','I','K','L','M',
+'N','P','Q','R','S','T','V','W','Y']
+#Pedindo sequencia ao usuario
+seq = input("Digite sua Sequencia: ")
+#Filtrando sequencia
+seq = seq.upper()
+tam = len(seq)
+porcent = {}
+prot = {}
+#pegando quantidade de aparições
+for flag in amno:
+    prot[flag] = seq.count(flag)
+## contando porcentagem e jogando no dicionario.
+for flag in seq:
+    if flag in amno:
+       porcent[flag] = (prot[flag] / float(len(seq)))*100
+##Printando resultado
+print(porcent)
