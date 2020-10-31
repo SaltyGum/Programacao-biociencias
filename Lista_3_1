@@ -1,0 +1,42 @@
+def isDigit(x):
+    try:
+        float(x)
+        return True
+    except ValueError:
+        return False
+
+
+print('-' * 100)
+print('Obs: Dê "enter" sem Digitar nada ao Terminar suas Entradas \n'
+      'Obs.2: Palavras tambem finalizarão o prog')
+print('-' * 100)
+num = input('Digite seu Numero: ')
+tot = 0
+qtd = 0
+pos = 0
+neg = 0
+zero = 0
+if num != '' and isDigit(num):
+    while num != '' and isDigit(num):
+        if num != '' and isDigit(num):
+            tot += float(num)
+            qtd += 1
+            if float(num) > 0:
+                pos += 1
+            elif float(num) < 0:
+                neg += 1
+            else:
+                zero += 1
+        num = input('Digite seu Numero: ')
+    med = tot / qtd
+    percent_pos = pos / (qtd / 100)
+    percent_neg = neg / (qtd / 100)
+    print('Média dos Valores lidos: %f\n'
+          'Quantidade de Valores Negativos: %d\n'
+          'Quantidade de Valores Positivos: %d\n'
+          'Porcentagem de Positivos: %d\n'
+          'Porcentagem de Negativos: %d\n'
+          'Quantidade de Zeros: %d'
+          % (med, neg, pos, percent_pos, percent_neg,zero))
+else:
+    print('Começou parando Why ?')
