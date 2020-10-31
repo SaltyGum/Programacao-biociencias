@@ -1,0 +1,36 @@
+def isDigit(x):
+    try:
+        float(x)
+        return True
+    except ValueError:
+        return False
+
+num = input('Digite seu Numero: ')
+tot = 0
+qtd = 0
+pos = 0
+neg = 0
+zero = 0
+while True:
+    if isDigit(num):
+        tot += float(num)
+        qtd += 1
+        if float(num) > 0:
+            pos += 1
+        elif float(num) < 0:
+            neg += 1
+        else:
+            zero += 1
+        med = tot / qtd
+        percent_pos = pos / (qtd / 100)
+        percent_neg = neg / (qtd / 100)
+        print('Média dos Valores lidos: %f\n'
+              'Quantidade de Valores Negativos: %d\n'
+              'Quantidade de Valores Positivos: %d\n'
+              'Porcentagem de Positivos: %d\n'
+              'Porcentagem de Negativos: %d\n'
+              'Quantidade de Zeros: %d'
+               % (med, neg, pos, percent_pos, percent_neg, zero))
+    else:
+        print('Não é um numero')
+    num = input('Digite seu Numero: ')
