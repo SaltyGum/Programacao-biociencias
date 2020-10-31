@@ -1,0 +1,21 @@
+from Bio.Seq import Seq
+from Bio import SeqIO
+##Função que conta os motivos
+def mulligan(sequence,motivo):
+    nome = str(linha.id)
+    mc = sequence.count(motivo)
+#Printando os identificadores das sequências que possuam o motivo
+    if mc != 0:
+        print("Identificador: ", nome, "Motivo:", motivo, "Count:", mc, sep=" ")
+
+
+## Lendo sequência do usuário
+motivo = input("Insira seu motivo: ").upper()
+##abrindo arquivo fasta
+multifasta = SeqIO.parse(open(
+    r"C:\Users\Jefferson\Desktop\UFRJ\PROG\PROG 2\TAC 4\TriTrypDB-47_TcruziCLBrenerEsmeraldo-like_AnnotatedProteins.fasta"),
+                         "fasta")
+for linha in multifasta:
+    sequence = str(linha.seq)
+    ## Usando função
+    mulligan(sequence, motivo)
