@@ -1,0 +1,11 @@
+peso =float(input('Digite seu Peso: '))
+alt = float(input('Digite sua Altura: '))
+imc = peso / (alt ** 2)
+if imc > 30 :
+    print('Você está Obeso Melhor começar com os Exercicios T.T !!\n IMC=%.2f'% imc)
+elif imc >= 25 :
+    print('Você está Acima do Peso Melhor repensar essa coxinha ;)\n IMC=%.2f'% imc)
+elif imc >= 18.5 :
+    print('Peso Normal causando inveja ein :D\n IMC=%.2f'% imc)
+else:
+    print('Você está Abaixo do Peso abre o ifood ai e pede umas besteira e.e\n IMC=%.2f'% imc)
