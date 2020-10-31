@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+nome = ''
+nome = input('Digite o nome do aluno: ')
+nt1 = float(input('Digite a Primeira Nota: '))
+nt2 = float(input('Digite a Segunda Nota: '))
+nt3 = float(input('Digite a Terceira Nota: '))
+faltas = int(input('Digite o Numero de Faltas: '))
+aulas = 80
+media = (nt1 + nt2 + nt3) / 3
+aux = 0
+if faltas > ((aulas / 100) * 25):
+    print(nome,'Reprovado por Faltas!!\n Media Final: %.2f' % media)
+    aux = 1
+elif media < 7.0 and aux == 0:
+    print(nome,'Reprovado por Média!!\n Media Final: %.2f' % media)
+else:
+    print(nome,'Aprovado Nota Final: %.2f' % media)
