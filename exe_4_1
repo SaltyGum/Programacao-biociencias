@@ -1,0 +1,55 @@
+###Função pra quantidade
+def qtd_valores(lista):
+    return len(lista)
+
+###Função pra ordenar
+def pre_ordain(lista):
+    return lista
+
+###Função para inverter
+def sub_invert(lista):
+    veta = sorted(lista, reverse=True)
+    for i in range(len(lista)):
+        print(veta[i])
+
+
+##Função para somar
+def sumsum (lista):
+    x = 0
+    for i in range(len(lista)):
+        x += int(vet[i])
+    return x
+
+###Função para media
+def medium_ok (lista):
+    x = 0
+    for i in range(len(lista)):
+        x += int(lista[i])
+    return x/len(lista)
+
+##Função para dizer se esta acima da media
+def high_medium(lista):
+    z = medium_ok(lista)
+    for i in range(len(lista)):
+        if int(lista[i]) > z:
+            print(lista[i])
+####################################
+
+
+print('-'*100)
+print('Digite Quantos Numeros Quiser. \n'
+      'Quando Quiser Parar Digite -1 ')
+print('-'*100)
+num = input('Digite seu Numero: ')
+vet = []
+##Capitalização de valores
+while num != '-1':
+    vet.append(int(num))
+    num = input('Digite seu Numero: ')
+##Printando usando as funções
+print('Quantidade: ', qtd_valores(vet),
+      'Ordenada: ', pre_ordain(vet))
+print('Invertida: '), sub_invert(vet)
+print('Soma: ', sumsum(vet),
+      'media: ', medium_ok(vet),)
+print('Acima da media: '), high_medium(vet)
