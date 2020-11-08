@@ -1,0 +1,25 @@
+vogal = lambda vet: vet.upper() in "AEIOU"
+consoante = lambda vet: vet.upper() in "BCDFGHJKLMNPQRSTUXWZ"
+numero = lambda vet: vet in "1234567890"
+
+linha = input("Digite sua groselha: ")
+
+vogais = 0
+consoantes = 0
+numeros = 0
+resto = 0
+
+for i in linha:
+    if vogal(i):
+        vogais += 1
+    elif consoante(i):
+        consoantes += 1
+    elif numero(i):
+        numeros += 1
+    else:
+        resto += 1
+
+print("Numero de consoantes = %d" % consoantes)
+print("Numero de vogais = %d" % vogais)
+print("Numero de números = %d" % numeros)
+print("Numero de outros = %d" % resto)
