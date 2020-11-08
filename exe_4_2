@@ -1,0 +1,10 @@
+def calculaAreaRetangulo(x, y = 0):
+    if y == 0:
+        return x * x
+    return x * y
+
+
+
+x = 5
+y = 9
+print(calculaAreaRetangulo(x,y))
