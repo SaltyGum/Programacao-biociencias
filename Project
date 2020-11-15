@@ -1,0 +1,142 @@
+# -*- coding: utf-8 -*-
+import sys
+import numpy
+import pandas as pd
+from Bio.Seq import Seq
+from Bio import SeqIO
+from Bio.Blast.Applications import NcbiblastxCommandline
+### Recebendo Entrada
+entry = sys.argv[1::]
+tab = entry[0]
+arqdes = entry[1]
+banco = entry[2]
+### Caminho do Blast e da Saida do Blast
+blastpath = r'C:\Program Files\NCBI\blast-2.10.1+\bin\blastx.exe'
+saida = r'C:\Users\Jefferson\Desktop\UFRJ\PROG\PROG2\Project\Saida.txt'
+### Abrindo Arquivo Excel
+df = pd.read_excel(tab).copy()
+### Abrindo Arquivo com Sequencias Desconhecidas
+
+### Criando Colunas Formatadas
+df['Rep1_A_CPM'] = df['Rep1_A']/(10**6)*(df['Rep1_A'].sum())
+df['Rep2_A_CPM'] = df['Rep2_A']/(10**6)*(df['Rep2_A'].sum())
+df['Rep1_B_CPM'] = df['Rep1_B']/(10**6)*(df['Rep1_B'].sum())
+df['Rep2_B_CPM'] = df['Rep2_B']/(10**6)*(df['Rep2_B'].sum())
+### Criando Colunas de Media
+df['Cond_A_CPM_media'] = (df['Rep1_A_CPM'].copy() + df['Rep2_A_CPM'].copy() ) / 2
+df['Cond_B_CPM_media'] = (df['Rep1_B_CPM'].copy() + df['Rep2_B_CPM'].copy() ) / 2
+### Pegando os 5 Maiores Valores Medios de Cada REP
+dfend_A = df.sort_values('Cond_A_CPM_media', ascending=False).copy().head()
+dfend_B = df.sort_values('Cond_B_CPM_media', ascending=False).copy().head()
+### Blast Das 5 Maiores medias de Rep A
+for i in range(5):
+    arq = open(arqdes)
+    x = dfend_A['gene_id'].values
+    for c in SeqIO.parse(arq, "fasta"):
+        if str(x[i]) in c.id:
+            j = x[i] + '.fasta'
+            aux2 = '>' + x[i] + '\n' + str(c.seq)
+            arq2 = open(j, 'w')
+            arq2.write(aux2)
+            arq2.close()
+            blase = NcbiblastxCommandline(cmd = blastpath,
+                                          query =j,
+                                          subject = banco,
+                                          evalue = 0.05,
+                                          outfmt = 6,
+                                          out = saida)
+            stdout, stdeer = blase()
+            result = pd.read_csv(saida,
+                                 sep='\t',
+                                 names=["Seq_ID",
+                                        "Amno_ID",
+                                        "pident",
+                                        "length",
+                                        "mismatch",
+                                        "gapopen",
+                                        "qstart",
+                                        "qend",
+                                        "sstart",
+                                        "send",
+                                        "E-value",
+                                        "Bitscore"])
+            score = result.sort_values('Bitscore')
+### Testando se os 2 Maiores Valores São Iguais ou Não, Testando o E-value e Printando
+            try:
+                if float(score.iloc[[0], 11]) == float(score.iloc[[1], 11]):
+                    if float(score.iloc[[0], 10]) < float(score.iloc[[1], 10]):
+                        print(score.iloc[[1], [0, 1]], dfend_A.iloc[[i], [9, 10]])
+                        break
+                    else:
+                        print(score.iloc[[0], [0, 1]])
+                        print(dfend_A.iloc[[i], [9, 10]])
+                        print('-' * 100)
+                        break
+                else:
+                    print(score.iloc[[0], [0, 1]])
+                    print(dfend_A.iloc[[i], [9, 10]])
+                    print('-' * 100)
+                    break
+            except IndexError:
+                print(score.iloc[[0], [0, 1]])
+                print(dfend_A.iloc[[i], [9, 10]])
+                print('-' * 100)
+                break
+    arq.close()
+### Blast Das 5 Maiores medias de Rep B
+for z in range(5):
+    arq = open(arqdes)
+    y = dfend_B['gene_id'].values
+    for a in SeqIO.parse(arq, "fasta"):
+        if y[z] in a.id:
+            k = y[z] + '.fasta'
+            aux2 = '>' + y[z] + '\n' + str(a.seq)
+            arq2 = open(k, 'w')
+            arq2.write(aux2)
+            arq2.close()
+            blase2 = NcbiblastxCommandline(cmd = blastpath,
+                                          query = k,
+                                          subject = banco,
+                                          evalue = 0.05,
+                                          outfmt = 6,
+                                          out = saida)
+            stdout, stdeer = blase2()
+            result2 = pd.read_csv(saida,
+                                 sep='\t',
+                                 names=["Seq_ID",
+                                        "Amno_ID",
+                                        "pident",
+                                        "length",
+                                        "mismatch",
+                                        "gapopen",
+                                        "qstart",
+                                        "qend",
+                                        "sstart",
+                                        "send",
+                                        "E-value",
+                                        "Bitscore"])
+            score2 = result2.sort_values('Bitscore')
+### Testando se os 2 Maiores Valores São Iguais ou Não, Testando o E-value e Printando
+            try:
+                if float(score2.iloc[[0], 11]) == float(score2.iloc[[1], 11]):
+                    if float(score2.iloc[[0], 10]) < float(score2.iloc[[1], 10]):
+                        print(score2.iloc[[1], [0, 1]])
+                        print(dfend_B.iloc[[z], [9, 10]])
+                        print('-'*100)
+                        break
+                    else:
+                        print(score2.iloc[[0], [0, 1]])
+                        print(dfend_B.iloc[[z], [9, 10]])
+                        print('-' * 100)
+                        break
+                else:
+                    print(score2.iloc[[0], [0, 1]])
+                    print(dfend_B.iloc[[z], [9, 10]])
+                    print('-' * 100)
+                    break
+            except IndexError:
+                print(score2.iloc[[0], [0, 1]])
+                print(dfend_B.iloc[[z], [9, 10]])
+                print('-' * 100)
+                break
+    arq.close()
